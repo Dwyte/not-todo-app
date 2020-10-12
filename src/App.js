@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Pane } from "evergreen-ui";
 import Form from "./Components/Form";
 import List from "./Components/List";
 
 function App() {
+  const [notTodos, setNotTodos] = useState([]);
+
+  const addNotTodo = (notTodo) => {
+    setNotTodos([...notTodos, notTodo]);
+  };
+
   return (
     <Pane padding={16}>
       <Pane
@@ -12,9 +18,9 @@ function App() {
         justifyContent="center"
         flexDirection="column"
       >
-        <Form />
+        <Form addNotTodo={addNotTodo} />
 
-        <List />
+        <List items={notTodos} />
       </Pane>
     </Pane>
   );

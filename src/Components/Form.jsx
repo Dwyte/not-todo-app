@@ -1,22 +1,38 @@
 import React from "react";
 import { Button, Pane, TextInput } from "evergreen-ui";
+import styled from "styled-components";
+import { useForm } from "react-hook-form";
 
-const Form = () => {
+const SForm = styled.form`
+  flex: 1;
+`;
+
+const Form = ({ addNotTodo }) => {
+  const { register, handleSubmit } = useForm();
+
   return (
     <Pane
+      marginBottom={12}
       borderRadius={4}
+      display="flex"
       elevation={0}
       padding={8}
       width={400}
-      display="flex"
-      marginBottom={12}
     >
-      <TextInput placeholder="What are you not doing today?" flex={1} />
+      <SForm onSubmit={handleSubmit(addNotTodo)}>
+        <TextInput
+          placeholder="What are you not doing today?"
+          name="content"
+          ref={register}
+          width="100%"
+        />
+      </SForm>
       <Button
+        onClick={handleSubmit(addNotTodo)}
         appearance="primary"
+        textAlign="center"
         intent="success"
         marginLeft={4}
-        textAlign="center"
       >
         Add
       </Button>
