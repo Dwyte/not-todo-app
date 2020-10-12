@@ -1,10 +1,29 @@
 import React, { useState } from "react";
 import NotTodoItem from "./NotTodoItem";
 import NotTodoEdit from "./NotTodoEdit";
-import { Pane } from "evergreen-ui";
+import { Pane, SegmentedControl } from "evergreen-ui";
+import { useEffect } from "react";
+
+const filterOptions = [
+  { label: "All", value: "all" },
+  { label: "Current", value: "current" },
+  { label: "Done", value: "done" },
+];
 
 const List = ({ setNotTodos, notTodos = [] }) => {
+  const [filteredNotTodos, setFilteredNotTodos] = useState(notTodos);
   const [notTodoOnEditId, setNotTodoOnEditId] = useState();
+  const [notTodoFilter, setNotTodoFilter] = useState("all");
+
+  useEffect(() => {
+    const _filteredNotTodos = notTodos.filter((notTodo) => {
+      if (notTodoFilter === "all") return true;
+      else if (notTodoFilter === "current") return !notTodo.isDone;
+      else return notTodo.isDone;
+    });
+
+    setFilteredNotTodos(_filteredNotTodos);
+  }, [notTodos, notTodoFilter]);
 
   const toggleIsDone = (notTodoId) => {
     const _notTodos = [...notTodos];
@@ -37,8 +56,8 @@ const List = ({ setNotTodos, notTodos = [] }) => {
     setNotTodoOnEditId(null);
   };
 
-  const renderItems = () =>
-    notTodos.map((notTodo, index) =>
+  const renderTodos = () =>
+    filteredNotTodos.map((notTodo, index) =>
       notTodoOnEditId === notTodo.id ? (
         <NotTodoEdit content={notTodo.content} onSave={saveNotTodo} />
       ) : (
@@ -54,8 +73,16 @@ const List = ({ setNotTodos, notTodos = [] }) => {
 
   return (
     <Pane elevation={0} width={400} padding={4} borderRadius={3}>
+      <SegmentedControl
+        onChange={(value) => setNotTodoFilter(value)}
+        options={filterOptions}
+        value={notTodoFilter}
+        height={24}
+        margin={4}
+      />
+
       {notTodos.length !== 0 ? (
-        renderItems()
+        renderTodos()
       ) : (
         <Pane
           justifyContent="center"
