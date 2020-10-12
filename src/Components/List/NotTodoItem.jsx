@@ -23,7 +23,13 @@ const SPane = styled(Pane)`
   }
 `;
 
-const Item = ({ content, isDone, handleTick, handleDelete }) => {
+const NotTodoItem = ({
+  content,
+  isDone,
+  handleTick,
+  handleDelete,
+  handleEdit,
+}) => {
   return (
     <SPane display="flex" margin={8}>
       <Pane
@@ -44,9 +50,10 @@ const Item = ({ content, isDone, handleTick, handleDelete }) => {
         marginLeft={4}
       />
       <IconButton
-        icon={EditIcon}
-        intent="default"
+        onClick={handleEdit}
         appearance="primary"
+        intent="default"
+        icon={EditIcon}
         marginLeft={4}
       />
 
@@ -61,4 +68,4 @@ const Item = ({ content, isDone, handleTick, handleDelete }) => {
   );
 };
 
-export default Item;
+export default NotTodoItem;

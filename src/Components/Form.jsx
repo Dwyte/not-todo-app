@@ -3,7 +3,7 @@ import { Button, Pane, TextInput } from "evergreen-ui";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 
-const SForm = styled.form`
+export const SForm = styled.form`
   flex: 1;
 `;
 
