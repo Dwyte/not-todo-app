@@ -23,7 +23,7 @@ const SPane = styled(Pane)`
   }
 `;
 
-const Item = ({ content, isDone, toggleIsDone }) => {
+const Item = ({ content, isDone, handleTick, handleDelete }) => {
   return (
     <SPane display="flex" margin={8}>
       <Pane
@@ -37,9 +37,10 @@ const Item = ({ content, isDone, toggleIsDone }) => {
       </Pane>
 
       <IconButton
+        onClick={handleDelete}
+        appearance="primary"
         icon={TrashIcon}
         intent="danger"
-        appearance="primary"
         marginLeft={4}
       />
       <IconButton
@@ -51,9 +52,9 @@ const Item = ({ content, isDone, toggleIsDone }) => {
 
       <IconButton
         icon={isDone ? UndoIcon : TickIcon}
-        intent="success"
+        onClick={handleTick}
         appearance="primary"
-        onClick={toggleIsDone}
+        intent="success"
         marginLeft={4}
       />
     </SPane>

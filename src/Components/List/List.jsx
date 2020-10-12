@@ -14,12 +14,24 @@ const List = ({ setNotTodos, notTodos = [] }) => {
     setNotTodos(_notTodos);
   };
 
+  const deleteNotTodo = (notTodoId) => {
+    const _notTodos = [...notTodos];
+    const notTodoIndex = _notTodos.findIndex(
+      (notTodo) => notTodo.id === notTodoId
+    );
+
+    _notTodos.splice(notTodoIndex, 1);
+
+    setNotTodos(_notTodos);
+  };
+
   const renderItems = () =>
     notTodos.map((notTodo, index) => (
       <NotTodoItem
         {...notTodo}
         key={index}
-        toggleIsDone={() => toggleIsDone(notTodo.id)}
+        handleTick={() => toggleIsDone(notTodo.id)}
+        handleDelete={() => deleteNotTodo(notTodo.id)}
       />
     ));
 
@@ -35,7 +47,7 @@ const List = ({ setNotTodos, notTodos = [] }) => {
           fontSize={14}
           padding={8}
         >
-          Add your first not todo!
+          Add your first !todo.
         </Pane>
       )}
     </Pane>
