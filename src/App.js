@@ -3,24 +3,37 @@ import { Pane } from "evergreen-ui";
 import Form from "./Components/Form";
 import List from "./Components/List";
 
+const defaultNotTodos = [
+  {
+    id: 0,
+    content: "Say bad words",
+    isDone: false,
+  },
+  {
+    id: 1,
+    content: "Eat Chocolates",
+    isDone: true,
+  },
+];
+
 function App() {
-  const [notTodos, setNotTodos] = useState([]);
+  const [notTodos, setNotTodos] = useState(defaultNotTodos);
 
   const addNotTodo = (notTodo) => {
-    setNotTodos([...notTodos, notTodo]);
+    const newNotTodo = { id: notTodos.length, ...notTodo };
+    setNotTodos([...notTodos, newNotTodo]);
   };
 
   return (
     <Pane padding={16}>
       <Pane
-        display="flex"
-        alignItems="center"
         justifyContent="center"
         flexDirection="column"
+        alignItems="center"
+        display="flex"
       >
         <Form addNotTodo={addNotTodo} />
-
-        <List items={notTodos} />
+        <List notTodos={notTodos} setNotTodos={setNotTodos} />
       </Pane>
     </Pane>
   );

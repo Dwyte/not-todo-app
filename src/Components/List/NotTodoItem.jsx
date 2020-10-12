@@ -1,10 +1,16 @@
 import React from "react";
-import { Pane, IconButton, TrashIcon, EditIcon, TickIcon } from "evergreen-ui";
+import {
+  Pane,
+  IconButton,
+  TrashIcon,
+  EditIcon,
+  TickIcon,
+  UndoIcon,
+} from "evergreen-ui";
 import styled from "styled-components";
 
 const SPane = styled(Pane)`
   cursor: pointer;
-  
 
   button {
     visibility: hidden;
@@ -17,10 +23,16 @@ const SPane = styled(Pane)`
   }
 `;
 
-const Item = ({ content }) => {
+const Item = ({ content, isDone, toggleIsDone }) => {
   return (
     <SPane display="flex" margin={8}>
-      <Pane flex={1} display="flex" alignItems="center" paddingLeft={4}>
+      <Pane
+        flex={1}
+        display="flex"
+        alignItems="center"
+        paddingLeft={4}
+        textDecoration={isDone && "line-through"}
+      >
         {content || "Content Placeholder"}
       </Pane>
 
@@ -36,10 +48,12 @@ const Item = ({ content }) => {
         appearance="primary"
         marginLeft={4}
       />
+
       <IconButton
-        icon={TickIcon}
+        icon={isDone ? UndoIcon : TickIcon}
         intent="success"
         appearance="primary"
+        onClick={toggleIsDone}
         marginLeft={4}
       />
     </SPane>

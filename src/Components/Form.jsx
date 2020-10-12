@@ -22,9 +22,10 @@ const Form = ({ addNotTodo }) => {
       <SForm onSubmit={handleSubmit(addNotTodo)}>
         <TextInput
           placeholder="What are you not doing today?"
+          ref={register({ required: true })}
           name="content"
-          ref={register}
           width="100%"
+          autoFocus
         />
       </SForm>
       <Button

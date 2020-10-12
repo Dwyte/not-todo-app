@@ -1,22 +1,39 @@
 import React from "react";
 import { Pane } from "evergreen-ui";
-import Item from "./Item";
+import NotTodoItem from "./NotTodoItem";
 
-const List = ({ items = [] }) => {
+const List = ({ setNotTodos, notTodos = [] }) => {
+  const toggleIsDone = (notTodoId) => {
+    const _notTodos = [...notTodos];
+    const notTodoIndex = _notTodos.findIndex(
+      (notTodo) => notTodo.id === notTodoId
+    );
+    const notTodo = _notTodos[notTodoIndex];
+
+    notTodo.isDone = !notTodo.isDone;
+    setNotTodos(_notTodos);
+  };
+
   const renderItems = () =>
-    items.map((item, index) => <Item key={index} {...item} />);
+    notTodos.map((notTodo, index) => (
+      <NotTodoItem
+        {...notTodo}
+        key={index}
+        toggleIsDone={() => toggleIsDone(notTodo.id)}
+      />
+    ));
 
   return (
     <Pane elevation={0} width={400} padding={4} borderRadius={3}>
-      {items.length !== 0 ? (
+      {notTodos.length !== 0 ? (
         renderItems()
       ) : (
         <Pane
-          display="flex"
-          alignItems="center"
           justifyContent="center"
-          padding={8}
+          alignItems="center"
+          display="flex"
           fontSize={14}
+          padding={8}
         >
           Add your first not todo!
         </Pane>
