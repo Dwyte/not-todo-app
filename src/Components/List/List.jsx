@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import NotTodoItem from "./NotTodoItem";
 import NotTodoEdit from "./NotTodoEdit";
-import { Pane, SegmentedControl } from "evergreen-ui";
+import { Pane, SegmentedControl, Dialog } from "evergreen-ui";
 import { useEffect } from "react";
 
 const filterOptions = [
@@ -12,7 +12,8 @@ const filterOptions = [
 
 const List = ({ setNotTodos, notTodos = [] }) => {
   const [filteredNotTodos, setFilteredNotTodos] = useState(notTodos);
-  const [notTodoOnEditId, setNotTodoOnEditId] = useState();
+  const [notTodoOnEditId, setNotTodoOnEditId] = useState(null);
+  const [notTodoOnDeleteId, setNotTodoOnDeleteId] = useState(null);
   const [notTodoFilter, setNotTodoFilter] = useState("all");
 
   useEffect(() => {
@@ -56,6 +57,11 @@ const List = ({ setNotTodos, notTodos = [] }) => {
     setNotTodoOnEditId(null);
   };
 
+  const confirmDeletion = () => {
+    deleteNotTodo(notTodoOnDeleteId);
+    setNotTodoOnDeleteId(null);
+  };
+
   const renderTodos = () =>
     filteredNotTodos.map((notTodo, index) =>
       notTodoOnEditId === notTodo.id ? (
@@ -65,7 +71,7 @@ const List = ({ setNotTodos, notTodos = [] }) => {
           {...notTodo}
           key={index}
           handleTick={() => toggleIsDone(notTodo.id)}
-          handleDelete={() => deleteNotTodo(notTodo.id)}
+          handleDelete={() => setNotTodoOnDeleteId(notTodo.id)}
           handleEdit={() => setNotTodoOnEditId(notTodo.id)}
         />
       )
@@ -73,6 +79,19 @@ const List = ({ setNotTodos, notTodos = [] }) => {
 
   return (
     <Pane elevation={1} width={400} padding={4} borderRadius={3}>
+      <Dialog
+        onCloseComplete={confirmDeletion}
+        onCancel={() => setNotTodoOnDeleteId(null)}
+        isShown={notTodoOnDeleteId !== null}
+        preventBodyScrolling={true}
+        confirmLabel="Delete"
+        hasHeader={false}
+        borderRadius={0}
+        intent="danger"
+      >
+        Are you sure you want to delete this !Todo? This cannot be undone.
+      </Dialog>
+
       <SegmentedControl
         onChange={(value) => setNotTodoFilter(value)}
         options={filterOptions}
