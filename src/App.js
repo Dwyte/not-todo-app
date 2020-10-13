@@ -27,7 +27,15 @@ function App() {
   };
 
   return (
-    <Pane padding={16}>
+    <Pane
+      padding={16}
+      marginTop={-32}
+      justifyContent="center"
+      flexDirection="column"
+      alignItems="center"
+      display="flex"
+      height="100%"
+    >
       <Pane
         justifyContent="center"
         flexDirection="column"
