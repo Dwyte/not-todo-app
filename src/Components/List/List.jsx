@@ -81,7 +81,7 @@ const List = ({ setNotTodos, notTodos = [] }) => {
         margin={4}
       />
 
-      {notTodos.length !== 0 ? (
+      {filteredNotTodos.length !== 0 ? (
         renderTodos()
       ) : (
         <Pane
@@ -94,7 +94,9 @@ const List = ({ setNotTodos, notTodos = [] }) => {
           padding={8}
           margin={4}
         >
-          Add your first not-todo.
+          {notTodoFilter === "done"
+            ? "No completed !Todos yet."
+            : "Add your first !Todo."}
         </Pane>
       )}
     </Pane>
