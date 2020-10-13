@@ -31,7 +31,7 @@ const NotTodoItem = ({
   handleEdit,
 }) => {
   return (
-    <SPane display="flex" margin={8}>
+    <SPane display="flex" padding={4} margin={4}>
       <Pane
         flex={1}
         display="flex"

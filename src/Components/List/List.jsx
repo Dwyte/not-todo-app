@@ -72,7 +72,7 @@ const List = ({ setNotTodos, notTodos = [] }) => {
     );
 
   return (
-    <Pane elevation={0} width={400} padding={4} borderRadius={3}>
+    <Pane elevation={1} width={400} padding={4} borderRadius={3}>
       <SegmentedControl
         onChange={(value) => setNotTodoFilter(value)}
         options={filterOptions}
@@ -87,11 +87,14 @@ const List = ({ setNotTodos, notTodos = [] }) => {
         <Pane
           justifyContent="center"
           alignItems="center"
+          background="tint2"
+          borderRadius={3}
           display="flex"
           fontSize={14}
           padding={8}
+          margin={4}
         >
-          Add your first !todo.
+          Add your first not-todo.
         </Pane>
       )}
     </Pane>

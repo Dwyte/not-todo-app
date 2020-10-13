@@ -7,7 +7,7 @@ const NotTodoEdit = ({ content, onSave }) => {
   const { handleSubmit, register } = useForm();
 
   return (
-    <Pane display="flex" margin={8}>
+    <Pane display="flex" padding={4} margin={4}>
       <SForm onSubmit={handleSubmit(onSave)}>
         <TextInput
           ref={register({ required: true })}

@@ -15,7 +15,7 @@ const Form = ({ addNotTodo }) => {
       marginBottom={12}
       borderRadius={4}
       display="flex"
-      elevation={0}
+      elevation={1}
       padding={8}
       width={400}
     >
