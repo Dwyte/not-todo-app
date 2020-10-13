@@ -18,7 +18,7 @@ const List = ({ setNotTodos, notTodos = [] }) => {
 
   useEffect(() => {
     const _filteredNotTodos = notTodos.filter((notTodo) => {
-      if (notTodoFilter === "all") return true;
+      if (notTodoFilter === "all") return !notTodo.isDone;
       else if (notTodoFilter === "current") return !notTodo.isDone;
       else return notTodo.isDone;
     });
@@ -108,8 +108,7 @@ const List = ({ setNotTodos, notTodos = [] }) => {
         height={24}
         margin={4}
       />
-
-      <Pane height={230} overflowY="auto" overflowX="hidden">
+      <Pane height={230} overflow="hidden">
         {filteredNotTodos.length !== 0 ? (
           renderTodos()
         ) : (
