@@ -80,7 +80,7 @@ const List = ({ setNotTodos, notTodos = [] }) => {
   return (
     <Pane elevation={1} width={400} padding={4} borderRadius={3}>
       <Dialog
-        onCloseComplete={confirmDeletion}
+        onConfirm={confirmDeletion}
         onCancel={() => setNotTodoOnDelete(null)}
         isShown={notTodoOnDelete !== null}
         preventBodyScrolling={true}
