@@ -100,24 +100,26 @@ const List = ({ setNotTodos, notTodos = [] }) => {
         margin={4}
       />
 
-      {filteredNotTodos.length !== 0 ? (
-        renderTodos()
-      ) : (
-        <Pane
-          justifyContent="center"
-          alignItems="center"
-          background="tint2"
-          borderRadius={3}
-          display="flex"
-          fontSize={14}
-          padding={8}
-          margin={4}
-        >
-          {notTodoFilter === "done"
-            ? "No completed !Todos yet."
-            : "Add your first !Todo."}
-        </Pane>
-      )}
+      <Pane height={230} overflow="auto">
+        {filteredNotTodos.length !== 0 ? (
+          renderTodos()
+        ) : (
+          <Pane
+            justifyContent="center"
+            alignItems="center"
+            background="tint2"
+            borderRadius={3}
+            display="flex"
+            fontSize={14}
+            padding={8}
+            margin={4}
+          >
+            {notTodoFilter === "done"
+              ? "No completed !Todos yet."
+              : "Add your first !Todo."}
+          </Pane>
+        )}
+      </Pane>
     </Pane>
   );
 };
