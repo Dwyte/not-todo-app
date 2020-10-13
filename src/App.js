@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Pane } from "evergreen-ui";
 import Form from "./Components/Form";
 import List from "./Components/List";
+import Title from "./Components/Title";
 
 const defaultNotTodos = [
   {
@@ -32,6 +33,7 @@ function App() {
         alignItems="center"
         display="flex"
       >
+        <Title />
         <Form addNotTodo={addNotTodo} />
         <List notTodos={notTodos} setNotTodos={setNotTodos} />
       </Pane>
