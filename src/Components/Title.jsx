@@ -7,7 +7,7 @@ function Title() {
       justifyContent="center"
       flexDirection="column"
       alignItems="center"
-      marginBottom={24}
+      marginBottom={16}
       display="flex"
     >
       <Heading size={800} marginBottom={4}>

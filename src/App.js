@@ -3,6 +3,7 @@ import { Pane } from "evergreen-ui";
 import Form from "./Components/Form";
 import List from "./Components/List";
 import Title from "./Components/Title";
+import Footer from "./Components/Footer";
 
 const defaultNotTodos = [
   {
@@ -36,6 +37,7 @@ function App() {
         <Title />
         <Form addNotTodo={addNotTodo} />
         <List notTodos={notTodos} setNotTodos={setNotTodos} />
+        <Footer />
       </Pane>
     </Pane>
   );
