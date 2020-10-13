@@ -39,7 +39,8 @@ const NotTodoItem = ({
         display="flex"
         flex={1}
       >
-        {content || "Content Placeholder"}
+        {content.substring(0, 24) || "Content Placeholder"}
+        {content.length > 24 && "..."}
       </Pane>
 
       <IconButton
