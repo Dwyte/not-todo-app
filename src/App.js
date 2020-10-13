@@ -21,7 +21,8 @@ const defaultNotTodos = [
 function App() {
   const [notTodos, setNotTodos] = useState(defaultNotTodos);
 
-  const addNotTodo = (notTodo) => {
+  const addNotTodo = (notTodo, e) => {
+    e.target.reset();
     const newNotTodo = { id: notTodos.length, ...notTodo };
     setNotTodos([...notTodos, newNotTodo]);
   };
