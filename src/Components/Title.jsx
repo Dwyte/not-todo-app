@@ -10,10 +10,10 @@ function Title() {
       marginBottom={16}
       display="flex"
     >
-      <Heading size={800} marginBottom={4}>
+      <Heading size={800} marginBottom={4} letterSpacing={2}>
         !TodoApp
       </Heading>
-      <Paragraph>
+      <Paragraph letterSpacing={1.5}>
         <span role="img" aria-label="less">🤏</span> Do less, achieve more.{" "}
         <span role="img" aria-label="more">🔥</span>
       </Paragraph>

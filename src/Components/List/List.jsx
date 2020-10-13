@@ -109,7 +109,7 @@ const List = ({ setNotTodos, notTodos = [] }) => {
         margin={4}
       />
 
-      <Pane height={230} overflow="auto">
+      <Pane height={230} overflowY="auto" overflowX="hidden">
         {filteredNotTodos.length !== 0 ? (
           renderTodos()
         ) : (

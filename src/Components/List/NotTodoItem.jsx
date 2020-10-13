@@ -33,11 +33,11 @@ const NotTodoItem = ({
   return (
     <SPane display="flex" padding={4} margin={4}>
       <Pane
-        flex={1}
-        display="flex"
+        textDecoration={isDone && "line-through"}
         alignItems="center"
         paddingLeft={4}
-        textDecoration={isDone && "line-through"}
+        display="flex"
+        flex={1}
       >
         {content || "Content Placeholder"}
       </Pane>
