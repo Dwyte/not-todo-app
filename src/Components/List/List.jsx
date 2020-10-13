@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import NotTodoItem from "./NotTodoItem";
 import NotTodoEdit from "./NotTodoEdit";
-import { Pane, SegmentedControl, Dialog } from "evergreen-ui";
+import { Pane, SegmentedControl, Dialog, InlineAlert } from "evergreen-ui";
 import { useEffect } from "react";
 
 const filterOptions = [
@@ -13,7 +13,7 @@ const filterOptions = [
 const List = ({ setNotTodos, notTodos = [] }) => {
   const [filteredNotTodos, setFilteredNotTodos] = useState(notTodos);
   const [notTodoOnEditId, setNotTodoOnEditId] = useState(null);
-  const [notTodoOnDeleteId, setNotTodoOnDeleteId] = useState(null);
+  const [notTodoOnDelete, setNotTodoOnDelete] = useState(null);
   const [notTodoFilter, setNotTodoFilter] = useState("all");
 
   useEffect(() => {
@@ -58,8 +58,8 @@ const List = ({ setNotTodos, notTodos = [] }) => {
   };
 
   const confirmDeletion = () => {
-    deleteNotTodo(notTodoOnDeleteId);
-    setNotTodoOnDeleteId(null);
+    deleteNotTodo(notTodoOnDelete.id);
+    setNotTodoOnDelete(null);
   };
 
   const renderTodos = () =>
@@ -71,7 +71,7 @@ const List = ({ setNotTodos, notTodos = [] }) => {
           {...notTodo}
           key={index}
           handleTick={() => toggleIsDone(notTodo.id)}
-          handleDelete={() => setNotTodoOnDeleteId(notTodo.id)}
+          handleDelete={() => setNotTodoOnDelete(notTodo)}
           handleEdit={() => setNotTodoOnEditId(notTodo.id)}
         />
       )
@@ -81,15 +81,24 @@ const List = ({ setNotTodos, notTodos = [] }) => {
     <Pane elevation={1} width={400} padding={4} borderRadius={3}>
       <Dialog
         onCloseComplete={confirmDeletion}
-        onCancel={() => setNotTodoOnDeleteId(null)}
-        isShown={notTodoOnDeleteId !== null}
+        onCancel={() => setNotTodoOnDelete(null)}
+        isShown={notTodoOnDelete !== null}
         preventBodyScrolling={true}
         confirmLabel="Delete"
         hasHeader={false}
         borderRadius={0}
         intent="danger"
       >
-        Are you sure you want to delete this !Todo? This cannot be undone.
+        <Pane
+          background="tint2"
+          marginBottom={4}
+          borderRadius={4}
+          fontSize={14}
+          padding={8}
+        >
+          <i>"{notTodoOnDelete && notTodoOnDelete.content}"</i>
+        </Pane>
+        <InlineAlert intent="danger">This cannot be undone.</InlineAlert>
       </Dialog>
 
       <SegmentedControl
